@@ -1,0 +1,140 @@
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 132.29167 132.29167"
+   version="1.1"
+   fill="#1F2937"
+   stroke="none"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   >
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <g
+       id="g306"
+       transform="matrix(1.1699852,0,0,1.1699852,-14.332964,-15.090847)">
+      <g
+         id="g148"
+         transform="translate(12.930104,-16.449881)">
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="path31"
+           cx="55.856068"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle135"
+           cx="18.881651"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle137"
+           cx="92.830475"
+           cy="85.883827"
+           r="11.901245" />
+      </g>
+      <g
+         id="g236"
+         transform="translate(12.930104,16.578959)">
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle230"
+           cx="55.856068"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle232"
+           cx="18.881651"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle234"
+           cx="92.830475"
+           cy="85.883827"
+           r="11.901245" />
+      </g>
+      <g
+         id="g244"
+         transform="translate(12.930104,-49.478736)">
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle238"
+           cx="55.856068"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle240"
+           cx="18.881651"
+           cy="85.883827"
+           r="11.901245" />
+        <circle
+           style="fill-rule:evenodd;stroke-width:0.264583"
+           id="circle242"
+           cx="92.830475"
+           cy="85.883827"
+           r="11.901245" />
+      </g>
+    </g>
+    <rect
+       style="stroke-width:0.264583"
+       id="rect395"
+       width="47.395794"
+       height="4.5708971"
+       x="18.750046"
+       y="25.217121" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect477"
+       width="47.395794"
+       height="4.5708971"
+       x="46.148552"
+       y="2.2598883e-06"
+       transform="rotate(45)" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect479"
+       width="47.395794"
+       height="4.5708971"
+       x="72.131897"
+       y="25.983347"
+       transform="rotate(45)" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect481"
+       width="47.395794"
+       height="4.5708971"
+       x="62.009556"
+       y="63.860394" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect483"
+       width="47.395794"
+       height="4.5708971"
+       x="24.074944"
+       y="103.83851" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect485"
+       width="47.395794"
+       height="4.5708971"
+       x="57.393303"
+       y="-111.6908"
+       transform="rotate(90)" />
+    <rect
+       style="stroke-width:0.264583"
+       id="rect487"
+       width="47.395794"
+       height="4.5708971"
+       x="17.728954"
+       y="-111.6908"
+       transform="rotate(90)" />
+  </g>
+</svg>
