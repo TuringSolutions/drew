@@ -7,7 +7,13 @@ import {
   ChevronRightIcon,
   ChevronDoubleRightIcon,
   ChevronDoubleDownIcon,
+  UserIcon,
+  BuildingOfficeIcon,
+  AtSymbolIcon,
+  EnvelopeIcon,
+  PhoneIcon,
 } from "@heroicons/vue/20/solid";
+
 import { computed, onMounted, ref } from "vue";
 import NET from "vanta/dist/vanta.net.min";
 import AwsCard from "../components/AwsCard.vue";
@@ -33,7 +39,7 @@ interface Testimonial {
   testimonialBody: string;
 }
 
-interface AWSUseCase{
+interface AWSUseCase {
   caseTitle: string;
   caseBody: Array<{ subtitle: string; description: string }>;
 }
@@ -219,8 +225,7 @@ const AWSUseCases: Array<AWSUseCase> = [
 let currentAWSCase = ref<AWSUseCase | null>();
 
 const toggleAWSCase = (index: number) => {
-  if (currentAWSCase.value?.caseTitle == AWSUseCases[index].caseTitle)
-  {
+  if (currentAWSCase.value?.caseTitle == AWSUseCases[index].caseTitle) {
     currentAWSCase.value = null;
     return;
   }
@@ -328,7 +333,7 @@ const turnTestimonialsRight = () => {
 
   <section class="bg-black text-white">
     <div
-      class="grid grid-cols-1 justify-items-stretch gap-8  py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
+      class="grid grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
     >
       <div
         class="flex flex-col items-center justify-center xl:col-span-4 xl:col-start-2 xl:items-end"
@@ -396,8 +401,11 @@ const turnTestimonialsRight = () => {
       </div>
 
       <div class="col-span-7 col-start-3 xl:hidden">
-        <div class="flex flex-col items-center bg-slate-800 p-6 gap-4">
-          <div v-for="(awsCase, index) in AWSUseCases" class="flex flex-col gap-2">
+        <div class="flex flex-col items-center gap-4 bg-slate-800 p-6">
+          <div
+            v-for="(awsCase, index) in AWSUseCases"
+            class="flex flex-col gap-2"
+          >
             <button @click="() => toggleAWSCase(index)">
               <div class="flex flex-row items-center justify-center">
                 <div class="text-lg font-medium uppercase">
@@ -410,10 +418,7 @@ const turnTestimonialsRight = () => {
               </div>
             </button>
             <div v-show="currentAWSCase?.caseTitle == awsCase.caseTitle">
-              <aws-card
-                :centered="true"
-                :current-aws-case="awsCase"
-              >
+              <aws-card :centered="true" :current-aws-case="awsCase">
               </aws-card>
             </div>
           </div>
@@ -437,7 +442,11 @@ const turnTestimonialsRight = () => {
               <div>
                 <chevron-double-right-icon
                   class="h-4 text-white transition ease-linear"
-                  :class="[currentAWSCase?.caseTitle == awsCase.caseTitle? 'opacity-100': 'opacity-0']"
+                  :class="[
+                    currentAWSCase?.caseTitle == awsCase.caseTitle
+                      ? 'opacity-100'
+                      : 'opacity-0',
+                  ]"
                 ></chevron-double-right-icon>
               </div>
             </div>
@@ -464,40 +473,62 @@ const turnTestimonialsRight = () => {
         </div>
       </div>
       <div class="col-span-7 col-start-3 md:col-span-3 md:col-start-3">
-        <label for="sendername" class="sr-only">Name</label>
-        <input
-          id="sendername"
-          type="text"
-          class="w-full border-2 border-black p-2"
-          placeholder="Name"
-        />
+        <div class="flex h-full w-full flex-row">
+          <div class="flex aspect-square items-center justify-center bg-black">
+            <user-icon class="h-6 w-6 text-white"></user-icon>
+          </div>
+          <label for="sendername" class="sr-only">Name</label>
+          <input
+            id="sendername"
+            type="text"
+            class="w-full border-2 border-black p-2"
+            placeholder="Name"
+          />
+        </div>
       </div>
       <div class="col-span-7 col-start-3 md:col-span-4 md:col-start-6">
-        <label for="companyname" class="sr-only">Company Name</label>
-        <input
-          id="companyname"
-          type="text"
-          class="w-full border-2 border-black p-2"
-          placeholder="Company Name"
-        />
+        <div class="flex h-full w-full flex-row">
+          <div class="flex aspect-square items-center justify-center bg-black">
+            <building-office-icon
+              class="h-6 w-6 text-white"
+            ></building-office-icon>
+          </div>
+          <label for="companyname" class="sr-only">Company Name</label>
+          <input
+            id="companyname"
+            type="text"
+            class="w-full border-2 border-black p-2"
+            placeholder="Company Name"
+          />
+        </div>
       </div>
       <div class="col-span-7 col-start-3 md:col-span-4 md:col-start-3">
-        <label for="senderemail" class="sr-only">Email ID</label>
-        <input
-          id="senderemail"
-          type="email"
-          class="w-full border-2 border-black p-2"
-          placeholder="Email ID"
-        />
+        <div class="flex h-full w-full flex-row">
+          <div class="flex aspect-square items-center justify-center bg-black">
+            <at-symbol-icon class="h-6 w-6 text-white"></at-symbol-icon>
+          </div>
+          <label for="senderemail" class="sr-only">Email ID</label>
+          <input
+            id="senderemail"
+            type="email"
+            class="w-full border-2 border-black p-2"
+            placeholder="Email ID"
+          />
+        </div>
       </div>
       <div class="col-span-7 col-start-3 md:col-span-3 md:col-start-7">
-        <label for="senderphone" class="sr-only">Phone Number</label>
+        <div class="flex h-full w-full flex-row">
+          <div class="flex aspect-square items-center justify-center bg-black">
+            <phone-icon class="h-6 w-6 text-white"></phone-icon>
+          </div>
+          <label for="senderphone" class="sr-only">Phone Number</label>
         <input
           id="senderphone"
           class="w-full border-2 border-black p-2"
           type="tel"
           placeholder="Phone Number"
         />
+        </div>
       </div>
       <div class="col-span-7 col-start-3">
         <label for="messagebody" class="sr-only">Message</label>
