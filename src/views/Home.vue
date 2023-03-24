@@ -5,10 +5,12 @@ import {
   ArrowSmallRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  ArrowLongRightIcon,
+  ChevronDoubleRightIcon,
+  ChevronDoubleDownIcon,
 } from "@heroicons/vue/20/solid";
 import { computed, onMounted, ref } from "vue";
 import NET from "vanta/dist/vanta.net.min";
+import AwsCard from "../components/AwsCard.vue";
 
 onMounted(() => {
   const vantaEffect = NET({
@@ -116,17 +118,112 @@ const HelpCases: Array<{ caseTitle: string; caseBody: string; url: string }> = [
   },
 ];
 
-let leftTestimonialIndex = ref(0);
-let centerTestimonialIndex = ref(1);
-let rightTestimonialIndex = ref(2);
+const AWSUseCases: Array<{
+  caseTitle: string;
+  caseBody: Array<{ subtitle: string; description: string }>;
+}> = [
+  {
+    caseTitle: "Improve Customer Experience",
+    caseBody: [
+      {
+        subtitle: "AWS Personalize",
+        description: "Recommendation, Personalization",
+      },
+      {
+        subtitle: "AWS Kendra",
+        description:
+          "Enhance web & apps with NLP to help users find what they search for",
+      },
+      {
+        subtitle: "AWS Connect",
+        description: "Contact center to support millions of customers",
+      },
+    ],
+  },
+  {
+    caseTitle: "Data Extraction & Analysis",
+    caseBody: [
+      {
+        subtitle: "AWS Comprehend",
+        description:
+          "Sentiment analysis, Topic modelling, Key-phrase extraction, Entity detection, Classification",
+      },
+      {
+        subtitle: "AWS Comprehend Medical",
+        description: "Extract information from unstructured medical text",
+      },
+      {
+        subtitle: "AWS Textract",
+        description:
+          "Document extraction, Document redaction, Table extraction",
+      },
+    ],
+  },
+  {
+    caseTitle: "Computer Vision",
+    caseBody: [
+      {
+        subtitle: "AWS Rekognition",
+        description:
+          "Object detection, Text detection, Image moderation, Activity detection",
+      },
+      {
+        subtitle: "AWS Lookout for Vision",
+        description:
+          "Detect defects, Automate inspection, Identify vehicle & structure damage",
+      },
+    ],
+  },
+  {
+    caseTitle: "Language AI",
+    caseBody: [
+      {
+        subtitle: "AWS Lex",
+        description: "Conversational chatbots, BI chatbots",
+      },
+      {
+        subtitle: "AWS Transcribe",
+        description:
+          "Speech-to-text, Create transcripts, Content redaction, Vocabulary filtering",
+      },
+      {
+        subtitle: "AWS Polly",
+        description: "Text-to-speech, Text dictation",
+      },
+    ],
+  },
+  {
+    caseTitle: "Business metrics",
+    caseBody: [
+      {
+        subtitle: "AWS Forecast",
+        description:
+          "Forecast business outcomes, Retail forecasting, Demand forecasting",
+      },
+      {
+        subtitle: "AWS Fraud Detector",
+        description:
+          "Identify suspicious online payments, Detect new account fraud, Prevent loyalty program abuse",
+      },
+      {
+        subtitle: "AWS Lookout for Metrics",
+        description:
+          "Detect anomalies in business metrics and identify their root cause, Understand churn & retention, Optimize your digital ad spend, Boost user engagement",
+      },
+    ],
+  },
+];
 
-let leftTestimonial = computed<Testimonial>(() =>
-  leftTestimonialIndex.value < Testimonials.length
-    ? (Testimonials.at(
-        leftTestimonialIndex.value % Testimonials.length
-      ) as Testimonial)
-    : Testimonials[leftTestimonialIndex.value % Testimonials.length]
-);
+let currentAWSCase = ref<{
+  caseTitle: string;
+  caseBody: Array<{ subtitle: string; description: string }>;
+}>();
+
+const setAWSCase = (index: number) => {
+  currentAWSCase.value = AWSUseCases[index];
+};
+
+let centerTestimonialIndex = ref(0);
 
 let centerTestimonial = computed<Testimonial>(() =>
   centerTestimonialIndex.value < Testimonials.length
@@ -136,42 +233,12 @@ let centerTestimonial = computed<Testimonial>(() =>
     : Testimonials[centerTestimonialIndex.value % Testimonials.length]
 );
 
-let rightTestimonial = computed<Testimonial>(() =>
-  rightTestimonialIndex.value < Testimonials.length
-    ? (Testimonials.at(
-        rightTestimonialIndex.value % Testimonials.length
-      ) as Testimonial)
-    : Testimonials[rightTestimonialIndex.value % Testimonials.length]
-);
-
 const turnTestimonialsLeft = () => {
-  console.log("It works!");
-  [
-    leftTestimonialIndex.value,
-    centerTestimonialIndex.value,
-    rightTestimonialIndex.value,
-  ] = [
-    leftTestimonialIndex.value - 1,
-    centerTestimonialIndex.value - 1,
-    rightTestimonialIndex.value - 1,
-  ];
+  centerTestimonialIndex.value = centerTestimonialIndex.value - 1;
 };
 
 const turnTestimonialsRight = () => {
-  console.log(
-    leftTestimonialIndex,
-    centerTestimonialIndex,
-    rightTestimonialIndex
-  );
-  [
-    leftTestimonialIndex.value,
-    centerTestimonialIndex.value,
-    rightTestimonialIndex.value,
-  ] = [
-    leftTestimonialIndex.value + 1,
-    centerTestimonialIndex.value + 1,
-    rightTestimonialIndex.value + 1,
-  ];
+  centerTestimonialIndex.value = centerTestimonialIndex.value + 1;
 };
 </script>
 
@@ -315,10 +382,76 @@ const turnTestimonialsRight = () => {
     </div>
   </section>
 
+  <section class="bg-black text-white">
+    <div class="grid grid-cols-11 gap-y-8 py-8 xl:py-12">
+      <div class="col-span-7 col-start-3 text-center text-xl">
+        Being a leading data science company, we help our clients extract
+        valuable business insights from their data to better understand their
+        audience, forecast demand, reduce risks, prevent cost overruns, and much
+        more. We use different tools and AI services, including AWS
+      </div>
+
+      <div class="col-span-7 col-start-3">
+        <div class="flex flex-col items-center bg-slate-800 p-6 gap-3 xl:hidden">
+          <div v-for="(awsCase, index) in AWSUseCases" class="flex flex-col">
+            <button @click="() => setAWSCase(index)">
+              <div class="flex flex-row items-center justify-center">
+                <div class="text-lg font-medium uppercase">
+                  {{ awsCase.caseTitle }}
+                </div>
+                <chevron-double-down-icon
+                  class="h-6 text-white"
+                  v-if="currentAWSCase?.caseTitle == awsCase.caseTitle"
+                ></chevron-double-down-icon>
+              </div>
+            </button>
+            <div v-show="currentAWSCase?.caseTitle == awsCase.caseTitle">
+              <aws-card
+                :centered="true"
+                :current-aws-case="awsCase"
+              >
+              </aws-card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-7 col-start-3 hidden xl:block">
+        <div
+          class="grid grid-flow-dense grid-cols-5 grid-rows-5 gap-y-2 gap-x-6 bg-slate-800 p-6"
+        >
+          <button
+            v-for="(awsCase, index) in AWSUseCases"
+            :key="awsCase.caseTitle"
+            class="col-span-2 col-start-1"
+            @click="() => setAWSCase(index)"
+          >
+            <div class="flex flex-row items-center justify-end gap-2">
+              <div class="text-right text-lg font-semibold">
+                {{ awsCase.caseTitle }}
+              </div>
+              <div>
+                <chevron-double-right-icon
+                  class="h-4 text-white"
+                  v-if="currentAWSCase?.caseTitle == awsCase.caseTitle"
+                ></chevron-double-right-icon>
+              </div>
+            </div>
+          </button>
+          <div class="col-span-full col-start-3 row-span-full h-56">
+            <aws-card
+              v-if="currentAWSCase != null"
+              :centered="false"
+              :current-aws-case="currentAWSCase"
+            ></aws-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section>
-    <div
-      class="grid grid-cols-11 justify-items-stretch gap-4 py-8 xl:py-12"
-    >
+    <div class="grid grid-cols-11 justify-items-stretch gap-4 py-8 xl:py-12">
       <div
         class="col-span-9 col-start-2 flex flex-col text-center text-2xl font-medium uppercase xl:text-4xl"
       >
@@ -326,7 +459,7 @@ const turnTestimonialsRight = () => {
           Get Started with Data Science Today
         </div>
       </div>
-      <div class="col-start-3 col-span-7 md:col-span-3 md:col-start-3">
+      <div class="col-span-7 col-start-3 md:col-span-3 md:col-start-3">
         <label for="sendername" class="sr-only">Name</label>
         <input
           id="sendername"
@@ -335,44 +468,46 @@ const turnTestimonialsRight = () => {
           placeholder="Name"
         />
       </div>
-      <div class="col-start-3 col-span-7 md:col-span-4 md:col-start-6">
+      <div class="col-span-7 col-start-3 md:col-span-4 md:col-start-6">
         <label for="companyname" class="sr-only">Company Name</label>
         <input
           id="companyname"
           type="text"
-          class="border-2 border-black w-full p-2"
+          class="w-full border-2 border-black p-2"
           placeholder="Company Name"
         />
       </div>
-      <div class="col-start-3 col-span-7 md:col-start-3 md:col-span-4">
+      <div class="col-span-7 col-start-3 md:col-span-4 md:col-start-3">
         <label for="senderemail" class="sr-only">Email ID</label>
         <input
           id="senderemail"
           type="email"
-          class="border-2 border-black w-full p-2"
+          class="w-full border-2 border-black p-2"
           placeholder="Email ID"
         />
       </div>
-      <div class="col-start-3 col-span-7 md:col-start-7 md:col-span-3">
+      <div class="col-span-7 col-start-3 md:col-span-3 md:col-start-7">
         <label for="senderphone" class="sr-only">Phone Number</label>
         <input
           id="senderphone"
-          class="border-2 border-black w-full p-2"
+          class="w-full border-2 border-black p-2"
           type="tel"
           placeholder="Phone Number"
         />
       </div>
-      <div class="col-start-3 col-span-7">
+      <div class="col-span-7 col-start-3">
         <label for="messagebody" class="sr-only">Message</label>
         <textarea
           id="messagebody"
           type="email"
-          class="border-2 border-black w-full p-2 h-36"
+          class="h-36 w-full border-2 border-black p-2"
           placeholder="Message"
         ></textarea>
       </div>
-      <div class="col-start-3 col-span-7">
-        <button class="bg-black text-white block w-full p-4 font-semibold">SUBMIT</button>
+      <div class="col-span-7 col-start-3">
+        <button class="block w-full bg-black p-4 font-semibold text-white">
+          SUBMIT
+        </button>
       </div>
     </div>
   </section>
