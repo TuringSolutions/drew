@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div
-    class="flex flex-col-reverse items-center justify-center gap-6 rounded-3xl border bg-white p-10 shadow-inner md:flex-row xl:gap-12"
+    class="flex flex-col-reverse items-center justify-center gap-6 rounded-3xl border p-10 shadow-inner md:flex-row xl:gap-12"
   >
     <div class="flex flex-col items-center justify-center">
       <image :src="imageSrc" alt="" v-if="imageSrc != ''"></image>

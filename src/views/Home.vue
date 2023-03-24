@@ -322,15 +322,15 @@ const turnTestimonialsRight = () => {
     </div>
   </section>
 
-  <section>
+  <section class="bg-black text-white">
     <div
-      class="grid grid-cols-1 justify-items-stretch gap-8 bg-black py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
+      class="grid grid-cols-1 justify-items-stretch gap-8  py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
     >
       <div
         class="flex flex-col items-center justify-center xl:col-span-4 xl:col-start-2 xl:items-end"
       >
         <div
-          class="text-center text-2xl font-medium uppercase text-white xl:text-right xl:text-4xl"
+          class="text-center text-2xl font-medium uppercase xl:text-right xl:text-4xl"
         >
           Let our clients<br />
           do the talking
@@ -340,12 +340,12 @@ const turnTestimonialsRight = () => {
         class="flex flex-row items-center justify-center gap-3 xl:col-span-4 xl:col-start-7 xl:justify-between"
       >
         <chevron-left-icon
-          class="h-32 cursor-pointer text-white"
+          class="h-32 cursor-pointer"
           @click="turnTestimonialsLeft"
         ></chevron-left-icon>
 
         <testimonial-card
-          class="testimonial-card"
+          class="testimonial-card bg-white text-black"
           :image-src="centerTestimonial.imageSrc"
           :key="centerTestimonial.authorName"
           :author-name="centerTestimonial.authorName"
@@ -355,7 +355,7 @@ const turnTestimonialsRight = () => {
         />
 
         <chevron-right-icon
-          class="h-32 cursor-pointer text-white"
+          class="h-32 cursor-pointer"
           @click="turnTestimonialsRight"
         ></chevron-right-icon>
       </div>
