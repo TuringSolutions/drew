@@ -432,12 +432,15 @@ const turnTestimonialsRight = () => {
           <button
             v-for="(awsCase, index) in AWSUseCases"
             :key="awsCase.caseTitle"
-            class="col-span-2 col-start-1"
+            class="col-span-2 col-start-1 group"
             @click="() => toggleAWSCase(index)"
           >
             <div class="flex flex-row items-center justify-end gap-2">
-              <div class="text-right text-lg font-semibold">
+              <div class="flex flex-col items-end justify-center">
+                <div class="text-right text-lg font-semibold">
                 {{ awsCase.caseTitle }}
+              </div>
+              <div class="h-0.5 bg-white group-hover:w-full transition-all ease-in-out" :class="[currentAWSCase?.caseTitle == awsCase.caseTitle? 'w-full bg-sky-500': 'w-8']"></div>
               </div>
               <div>
                 <chevron-double-right-icon
@@ -451,7 +454,7 @@ const turnTestimonialsRight = () => {
               </div>
             </div>
           </button>
-          <div class="col-span-full col-start-3 row-span-full h-56">
+          <div class="col-span-full col-start-3 row-span-full h-56 transition ease-linear" :class="[currentAWSCase == null? 'opacity-0' : 'opacity-100']">
             <aws-card
               :centered="false"
               :current-aws-case="currentAWSCase as AWSUseCase"
