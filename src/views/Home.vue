@@ -296,7 +296,9 @@ const turnTestimonialsRight = () => {
   </section>
 
   <section>
-    <div class="grid grid-cols-11 justify-items-stretch gap-8 py-8 xl:py-12 xl:gap-12">
+    <div
+      class="grid grid-cols-11 justify-items-stretch gap-8 py-8 xl:gap-12 xl:py-12"
+    >
       <div
         class="col-span-9 col-start-2 text-center text-2xl font-medium uppercase xl:text-4xl"
       >
@@ -309,6 +311,68 @@ const turnTestimonialsRight = () => {
           :case-body="helpCase.caseBody"
           :url="helpCase.url"
         ></help-case>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div
+      class="grid grid-cols-11 justify-items-stretch gap-4 py-8 xl:py-12"
+    >
+      <div
+        class="col-span-9 col-start-2 flex flex-col text-center text-2xl font-medium uppercase xl:text-4xl"
+      >
+        <div class="text-center text-2xl font-medium uppercase xl:text-4xl">
+          Get Started with Data Science Today
+        </div>
+      </div>
+      <div class="col-start-3 col-span-7 md:col-span-3 md:col-start-3">
+        <label for="sendername" class="sr-only">Name</label>
+        <input
+          id="sendername"
+          type="text"
+          class="w-full border-2 border-black p-2"
+          placeholder="Name"
+        />
+      </div>
+      <div class="col-start-3 col-span-7 md:col-span-4 md:col-start-6">
+        <label for="companyname" class="sr-only">Company Name</label>
+        <input
+          id="companyname"
+          type="text"
+          class="border-2 border-black w-full p-2"
+          placeholder="Company Name"
+        />
+      </div>
+      <div class="col-start-3 col-span-7 md:col-start-3 md:col-span-4">
+        <label for="senderemail" class="sr-only">Email ID</label>
+        <input
+          id="senderemail"
+          type="email"
+          class="border-2 border-black w-full p-2"
+          placeholder="Email ID"
+        />
+      </div>
+      <div class="col-start-3 col-span-7 md:col-start-7 md:col-span-3">
+        <label for="senderphone" class="sr-only">Phone Number</label>
+        <input
+          id="senderphone"
+          class="border-2 border-black w-full p-2"
+          type="tel"
+          placeholder="Phone Number"
+        />
+      </div>
+      <div class="col-start-3 col-span-7">
+        <label for="messagebody" class="sr-only">Message</label>
+        <textarea
+          id="messagebody"
+          type="email"
+          class="border-2 border-black w-full p-2 h-36"
+          placeholder="Message"
+        ></textarea>
+      </div>
+      <div class="col-start-3 col-span-7">
+        <button class="bg-black text-white block w-full p-4 font-semibold">SUBMIT</button>
       </div>
     </div>
   </section>
