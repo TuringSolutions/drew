@@ -33,6 +33,11 @@ interface Testimonial {
   testimonialBody: string;
 }
 
+interface AWSUseCase{
+  caseTitle: string;
+  caseBody: Array<{ subtitle: string; description: string }>;
+}
+
 const Testimonials: Array<Testimonial> = [
   {
     imageSrc: "",
@@ -118,10 +123,7 @@ const HelpCases: Array<{ caseTitle: string; caseBody: string; url: string }> = [
   },
 ];
 
-const AWSUseCases: Array<{
-  caseTitle: string;
-  caseBody: Array<{ subtitle: string; description: string }>;
-}> = [
+const AWSUseCases: Array<AWSUseCase> = [
   {
     caseTitle: "Improve Customer Experience",
     caseBody: [
@@ -214,12 +216,14 @@ const AWSUseCases: Array<{
   },
 ];
 
-let currentAWSCase = ref<{
-  caseTitle: string;
-  caseBody: Array<{ subtitle: string; description: string }>;
-}>();
+let currentAWSCase = ref<AWSUseCase | null>();
 
-const setAWSCase = (index: number) => {
+const toggleAWSCase = (index: number) => {
+  if (currentAWSCase.value?.caseTitle == AWSUseCases[index].caseTitle)
+  {
+    currentAWSCase.value = null;
+    return;
+  }
   currentAWSCase.value = AWSUseCases[index];
 };
 
@@ -391,10 +395,10 @@ const turnTestimonialsRight = () => {
         more. We use different tools and AI services, including AWS
       </div>
 
-      <div class="col-span-7 col-start-3">
-        <div class="flex flex-col items-center bg-slate-800 p-6 gap-3 xl:hidden">
-          <div v-for="(awsCase, index) in AWSUseCases" class="flex flex-col">
-            <button @click="() => setAWSCase(index)">
+      <div class="col-span-7 col-start-3 xl:hidden">
+        <div class="flex flex-col items-center bg-slate-800 p-6 gap-4">
+          <div v-for="(awsCase, index) in AWSUseCases" class="flex flex-col gap-2">
+            <button @click="() => toggleAWSCase(index)">
               <div class="flex flex-row items-center justify-center">
                 <div class="text-lg font-medium uppercase">
                   {{ awsCase.caseTitle }}
@@ -424,7 +428,7 @@ const turnTestimonialsRight = () => {
             v-for="(awsCase, index) in AWSUseCases"
             :key="awsCase.caseTitle"
             class="col-span-2 col-start-1"
-            @click="() => setAWSCase(index)"
+            @click="() => toggleAWSCase(index)"
           >
             <div class="flex flex-row items-center justify-end gap-2">
               <div class="text-right text-lg font-semibold">
@@ -432,17 +436,17 @@ const turnTestimonialsRight = () => {
               </div>
               <div>
                 <chevron-double-right-icon
-                  class="h-4 text-white"
-                  v-if="currentAWSCase?.caseTitle == awsCase.caseTitle"
+                  class="h-4 text-white transition ease-linear"
+                  :class="[currentAWSCase?.caseTitle == awsCase.caseTitle? 'opacity-100': 'opacity-0']"
                 ></chevron-double-right-icon>
               </div>
             </div>
           </button>
           <div class="col-span-full col-start-3 row-span-full h-56">
             <aws-card
-              v-if="currentAWSCase != null"
               :centered="false"
-              :current-aws-case="currentAWSCase"
+              :current-aws-case="currentAWSCase as AWSUseCase"
+              v-show="currentAWSCase != null"
             ></aws-card>
           </div>
         </div>
