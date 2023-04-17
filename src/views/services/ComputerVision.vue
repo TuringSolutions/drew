@@ -49,6 +49,41 @@ const expertiseTiles: Array<{ title: string; body: string; svgLink: string }> =
     },
   ];
 
+const keyBenefits: Array<{
+  title: string;
+  body: string;
+  benefits: Array<string>;
+}> = [
+  {
+    title: "Automate Manufacturing Parts Search and Reduce Time and Expenses",
+    body: "You can't afford excessive downtime searching for a desirable product manually. A vast array of components adds to the arising difficulties. Our team is ready to help you get back up and running in no time and evade unnecessary time and money losses. An ML model analyses a picture and demonstrates the most similar ones from the database. Automating manufacturing parts search, you cut down on expenses, improve workflow efficiency, and prevent downtime.",
+    benefits: [
+      "Easy search for products",
+      "Quick search for similar objects",
+      "Downtime prevention",
+    ],
+  },
+  {
+    title: "Ensure On-Site Safety with Forklift Collision Prevention System",
+    body: "With the increasing complexity of supply chain operations and forklift traffic, it becomes paramount to reduce the risks of employee injuries to a minimum. Embed our forklift accident prevention solutions to control the speed, movement, and location of your forklifts on site. Our engineers utilize high-end technologies to help you solve the most challenging forklift safety scenarios and increase employer safety. With real-time monitoring, an operator under risk receives prompt alerts in case of arising danger.",
+    benefits: [
+      "Safe working environment",
+      "Avoiding injury payments",
+      "Real-time monitoring",
+    ],
+  },
+  {
+    title:
+      "Make Process-Chain Efficient with Analogue Meters Reading Automation",
+    body: "Harsh working conditions and human errors make manual analogue meters reading ineffective. Here, automation is a go-to solution to exponentially reduce the number of incorrect meter readings, cut down expenses, and optimize analogue meters reading on the whole. Switch to automated analogue meter reading to increase meters reading accuracy and prevent energy fraud and electrical losses.",
+    benefits: [
+      "Real-time and accurate gauge measurement",
+      "Saving resources",
+      "Reducing fraud instances",
+    ],
+  },
+];
+
 const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: "How much does a typical computer vision project cost? ",
@@ -107,9 +142,82 @@ const FAQs: Array<{ question: string; answer: string }> = [
     </div>
   </div>
 
+  <section class="py-12">
+    <div class="container mx-auto max-w-6xl text-xl">
+      Our team of experts at InData Labs helps businesses in Healthcare,
+      Manufacturing, Fitness and Sports, E-commerce, Marketing and Logistics,
+      and other industries solve business challenges and fuel growth with the
+      help of computer vision technology. No matter what solution you need - a
+      surveillance video system, building a visual inspection system, invoice
+      processing app, or pose estimation implementation for enhancing your
+      customer experience and automating business processes, we'll find the
+      right way to address it.
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div
+      class="container mx-auto flex max-w-6xl flex-col items-center justify-center"
+    >
+      <div class="text-2xl font-medium uppercase">
+        Computer Vision Expertise
+      </div>
+      <div class="py-2 text-xl">
+        Our computer vision software development team builds custom solutions
+        for varied use cases
+      </div>
+      <div class="grid grid-cols-3 items-stretch gap-4">
+        <div
+          v-for="tile in expertiseTiles"
+          :key="tile.title"
+          class="flex h-56 flex-col items-center justify-start gap-6 border border-sky-500 p-6 hover:shadow"
+        >
+          <div class="text-center text-xl font-medium uppercase">
+            {{ tile.title }}
+          </div>
+          <div class="text-justify text-lg">
+            {{ tile.body }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div
+      class="container mx-auto flex max-w-6xl flex-col items-center justify-center gap-6"
+    >
+      <div>Benefits</div>
+      <div class="grid grid-rows-3 items-start justify-center gap-8">
+        <template v-for="benefit in keyBenefits" :key="benefit.title">
+          <div class="flex flex-col items-stretch justify-center gap-2">
+            <div class="text-center text-xl font-semibold uppercase">
+              {{ benefit.title }}
+            </div>
+            <div class="text-justify text-lg">
+              {{ benefit.body }}
+            </div>
+            <div class="text-center text-lg font-medium">Key Benefits:</div>
+            <ul class="flex flex-col items-center justify-start">
+              <li
+                v-for="subBenefit in benefit.benefits"
+                :key="subBenefit"
+                class="text-lg"
+              >
+                {{ subBenefit }}
+              </li>
+            </ul>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
   <section class="py-24">
-    <div class="container mx-auto max-w-6xl flex flex-col items-center justify-center xl:grid  xl:grid-cols-12 xl:items-start xl:justify-start ">
-      <div class="col-span-5 flex flex-col items-center xl:items-start gap-2">
+    <div
+      class="container mx-auto flex max-w-6xl flex-col items-center justify-center xl:grid xl:grid-cols-12 xl:items-start xl:justify-start"
+    >
+      <div class="col-span-5 flex flex-col items-center gap-2 xl:items-start">
         <div class="text-2xl font-semibold">Frequently Asked Questions</div>
         <div class="text-center xl:text-left">
           Can't find your question here? Reach out to
@@ -121,7 +229,7 @@ const FAQs: Array<{ question: string; answer: string }> = [
           .
         </div>
       </div>
-      <div class="xl:col-span-7 flex flex-col gap-4 px-8">
+      <div class="flex flex-col gap-4 px-8 xl:col-span-7">
         <div v-for="faq in FAQs" :key="faq['question']" class="flex flex-col">
           <div class="text-lg font-bold">
             {{ faq.question }}
