@@ -29,7 +29,6 @@ onMounted(() => {
   });
 });
 
-const VantaHero = ref();
 
 interface Testimonial {
   imageSrc: string;
@@ -454,6 +453,7 @@ const turnTestimonialsRight = () => {
               </div>
             </div>
           </button>
+          <transition>
           <div class="col-span-full col-start-3 row-span-full h-56 transition ease-linear" :class="[currentAWSCase == null? 'opacity-0' : 'opacity-100']">
             <aws-card
               :centered="false"
@@ -461,6 +461,7 @@ const turnTestimonialsRight = () => {
               v-show="currentAWSCase != null"
             ></aws-card>
           </div>
+        </transition>
         </div>
       </div>
     </div>
