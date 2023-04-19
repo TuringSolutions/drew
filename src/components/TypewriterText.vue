@@ -1,71 +1,66 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
-let typeValue = ref<string>();
-let typeStatus = ref<Boolean>(false);
-const props = defineProps<{ displayTextArray: Array<string> }>();
-let typingSpeed = ref<number>(100);
-let erasingSpeed = ref<number>(100);
-let newTextDelay = ref<number>(2000);
-let displayTextArrayIndex = ref<number>(0);
-let charIndex = ref<number>(0);
+const props = defineProps<{
+  displayTextArray: Array<string>;
+  typingSpeed: number;
+  erasingSpeed: number;
+  newTextDelay: number;
+}>();
+
+let typedValue = ref<string>("");
+let typeStatus = ref(false);
+let displayTextArrayIndex = ref(0);
+let displayText = computed(
+  () => props.displayTextArray[displayTextArrayIndex.value]
+);
+let charIndex = ref(0);
 
 const typeText = () => {
-  if (
-    charIndex.value < props.displayTextArray[displayTextArrayIndex.value].length
-  ) {
-    if (!typeStatus.value) {
-      typeStatus.value = true;
-    }
-    typeValue.value += props.displayTextArray[
-      displayTextArrayIndex.value
-    ].charAt(charIndex.value);
+  if (charIndex.value < displayText.value.length) {
+    typeStatus.value = true;
+    typedValue.value += displayText.value.charAt(charIndex.value);
     charIndex.value += 1;
-    setTimeout(typeText, typingSpeed.value);
+    console.log(displayText.value.charAt(charIndex.value));
+    setTimeout(typeText, props.typingSpeed);
   } else {
     typeStatus.value = false;
-    setTimeout(eraseText, newTextDelay.value);
+    setTimeout(eraseText, props.newTextDelay);
   }
 };
 
 const eraseText = () => {
   if (charIndex.value > 0) {
-    if (!typeStatus.value) typeStatus.value = true;
-    typeValue.value = props.displayTextArray[
-      displayTextArrayIndex.value
-    ].substring(0, charIndex.value - 1);
+    typeStatus.value = true;
+    typedValue.value = typedValue.value.slice(0, -1);
     charIndex.value -= 1;
-    setTimeout(eraseText, erasingSpeed.value);
+    setTimeout(eraseText, props.erasingSpeed);
   } else {
     typeStatus.value = false;
     displayTextArrayIndex.value += 1;
-    if (displayTextArrayIndex.value >= props.displayTextArray.length)
+    if (displayTextArrayIndex.value >= props.displayTextArray.length) {
       displayTextArrayIndex.value = 0;
-    setTimeout(typeText, typingSpeed.value + 1000);
+    }
+    setTimeout(typeText, props.typingSpeed + 1000);
   }
 };
 
 onMounted(() => {
-    setTimeout(typeText, newTextDelay.value + 500)
-})
+  setTimeout(typeText, props.newTextDelay + 200);
+});
 </script>
 
 <template>
-  <div>
-    <span class="typed-text">{{ typeValue }}</span>
-    <span class="blinking-cursor">|</span>
-    <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
-  </div>
+  <span>
+    <span class="typing-effect">
+      {{ typedValue }}
+    </span>
+    <span class=" text-white">|</span>
+  </span>
 </template>
 
 <style scoped>
-.typed-text {
-    color: #d2b94b;
-}
-
 .blinking-cursor {
-  font-size: 2rem;
-  color: #2c3e50;
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;
   -ms-animation: 1s blink step-end infinite;
@@ -79,7 +74,7 @@ onMounted(() => {
     color: transparent;
   }
   50% {
-    color: #2c3e50;
+    color: #ffffff;
   }
 }
 
@@ -89,10 +84,9 @@ onMounted(() => {
     color: transparent;
   }
   50% {
-    color: #2c3e50;
+    color: #000000;
   }
 }
-
 @-webkit-keyframes blink {
   from,
   to {
@@ -102,7 +96,6 @@ onMounted(() => {
     color: #2c3e50;
   }
 }
-
 @-ms-keyframes blink {
   from,
   to {
@@ -112,7 +105,6 @@ onMounted(() => {
     color: #2c3e50;
   }
 }
-
 @-o-keyframes blink {
   from,
   to {

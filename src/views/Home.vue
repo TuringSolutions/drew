@@ -17,6 +17,7 @@ import {
 import { computed, onMounted, ref } from "vue";
 import NET from "vanta/dist/vanta.net.min";
 import AwsCard from "../components/AwsCard.vue";
+import TypewriterText from "../components/TypewriterText.vue";
 
 onMounted(() => {
   const vantaEffect = NET({
@@ -28,7 +29,6 @@ onMounted(() => {
     scaleMobile: 1.0,
   });
 });
-
 
 interface Testimonial {
   imageSrc: string;
@@ -221,6 +221,8 @@ const AWSUseCases: Array<AWSUseCase> = [
   },
 ];
 
+const typewriterTextArray = ["Data Science and Technology", "Big Data Analytics", "Predictive Analysis", "Natural Language Processing", "Data Capture and OCR"]
+
 let currentAWSCase = ref<AWSUseCase | null>();
 
 const toggleAWSCase = (index: number) => {
@@ -253,26 +255,27 @@ const turnTestimonialsRight = () => {
 <template>
   <div
     id="VantaHero"
-    class="hero flex flex-col items-center justify-center gap-24 bg-slate-900"
+    class="hero flex flex-col items-start justify-center bg-slate-900 px-16"
   >
-    <div class="flex flex-col items-center justify-center gap-3 px-6 xl:px-8">
-      <div
-        class="text-3xl font-medium uppercase text-white md:text-5xl xl:text-8xl"
+    <div class="container mx-auto flex flex-col items-start justify-center gap-16 px-6 xl:px-8">
+      <div class="flex flex-col items-start justify-center gap-8">
+        <div
+          class="text-3xl font-medium uppercase text-white md:text-5xl xl:text-8xl"
+        >
+          Big on Data Science & AI
+        </div>
+        <div class="text-xl text-gray-300 md:text-3xl xl:text-4xl">
+          Empowering your business needs with <typewriter-text class="bg-black px-3" :display-text-array="typewriterTextArray" :typing-speed="100" :erasing-speed="100" :new-text-delay="2000"></typewriter-text>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="focus-visible:outline-3 inline-flex items-center bg-gray-100 p-4 text-xl font-semibold text-gray-900 shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-stone-400 xl:p-6 xl:text-3xl"
       >
-        Big on Data Science & AI
-      </div>
-      <div class="text-center text-xl text-gray-300 xl:text-3xl">
-        Empowering your business needs with Data Science and Technology
-      </div>
+        <div class="uppercase">Book a free consultation</div>
+        <arrow-small-right-icon class="-mr-2 h-10 w-10" aria-hidden="true" />
+      </button>
     </div>
-
-    <button
-      type="button"
-      class="focus-visible:outline-3 inline-flex items-center bg-gray-100 p-4 text-xl font-semibold text-gray-900 shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-stone-400 xl:p-6 xl:text-3xl"
-    >
-      <div class="uppercase">Book a free consultation</div>
-      <arrow-small-right-icon class="-mr-2 h-10 w-10" aria-hidden="true" />
-    </button>
   </div>
 
   <section class="bg-slate-700">
@@ -431,15 +434,22 @@ const turnTestimonialsRight = () => {
           <button
             v-for="(awsCase, index) in AWSUseCases"
             :key="awsCase.caseTitle"
-            class="col-span-2 col-start-1 group"
+            class="group col-span-2 col-start-1"
             @click="() => toggleAWSCase(index)"
           >
             <div class="flex flex-row items-center justify-end gap-2">
               <div class="flex flex-col items-end justify-center">
                 <div class="text-right text-lg font-semibold">
-                {{ awsCase.caseTitle }}
-              </div>
-              <div class="h-0.5 bg-white group-hover:w-full transition-all ease-in-out" :class="[currentAWSCase?.caseTitle == awsCase.caseTitle? 'w-full bg-sky-500': 'w-8']"></div>
+                  {{ awsCase.caseTitle }}
+                </div>
+                <div
+                  class="h-0.5 bg-white transition-all ease-in-out group-hover:w-full"
+                  :class="[
+                    currentAWSCase?.caseTitle == awsCase.caseTitle
+                      ? 'w-full bg-sky-500'
+                      : 'w-8',
+                  ]"
+                ></div>
               </div>
               <div>
                 <chevron-double-right-icon
@@ -454,14 +464,17 @@ const turnTestimonialsRight = () => {
             </div>
           </button>
           <transition>
-          <div class="col-span-full col-start-3 row-span-full h-56 transition ease-linear" :class="[currentAWSCase == null? 'opacity-0' : 'opacity-100']">
-            <aws-card
-              :centered="false"
-              :current-aws-case="currentAWSCase as AWSUseCase"
-              v-show="currentAWSCase != null"
-            ></aws-card>
-          </div>
-        </transition>
+            <div
+              class="col-span-full col-start-3 row-span-full h-56 transition ease-linear"
+              :class="[currentAWSCase == null ? 'opacity-0' : 'opacity-100']"
+            >
+              <aws-card
+                :centered="false"
+                :current-aws-case="currentAWSCase as AWSUseCase"
+                v-show="currentAWSCase != null"
+              ></aws-card>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -526,12 +539,12 @@ const turnTestimonialsRight = () => {
             <phone-icon class="h-6 w-6 text-white"></phone-icon>
           </div>
           <label for="senderphone" class="sr-only">Phone Number</label>
-        <input
-          id="senderphone"
-          class="w-full border-2 border-black p-2"
-          type="tel"
-          placeholder="Phone Number"
-        />
+          <input
+            id="senderphone"
+            class="w-full border-2 border-black p-2"
+            type="tel"
+            placeholder="Phone Number"
+          />
         </div>
       </div>
       <div class="col-span-7 col-start-3">

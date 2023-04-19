@@ -11,8 +11,8 @@ import {
   CheckBadgeIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/vue/20/solid";
-import TimelineGraph from "../../components/TimelineGraph2.vue";
 import TypewriterText from "../../components/TypewriterText.vue";
+import FaqSection from "../../components/FaqSection.vue";
 onMounted(() => {
   const vantaEffect = NET({
     el: "#VantaHero",
@@ -178,7 +178,28 @@ let currentDevProcessIndex = ref<number>(0);
 const setCurrentIndex = (index: number) =>
   (currentDevProcessIndex.value = index);
 
-const typewriterTexts = ["Hello", "world", "thocc", "panda"];
+const FAQs: Array<{ question: string; answer: string }> = [
+  {
+    question: "What is AI in software development?",
+    answer:
+      "AI is used in software development to help write code faster and more effectively, automate manual tasks, and speed up the testing process. Using AI in software app development, one can expect the app to be more robust, speedy, and almost error-free.",
+  },
+  {
+    question: "How much does an app with AI cost?",
+    answer:
+      "Custom AI apps may cost from $15 K up to $70-100K and more. The cost usually comes from complexity, functionality, and exclusiveness.",
+  },
+  {
+    question: "What is an AI development company?",
+    answer:
+      "An AI company is an AI technology vendor who has got broad expertise under their belt, an impressive project portfolio in various business domains. AI, data scientists, software engineers, quality assurance specialists can usually work on an average project.",
+  },
+  {
+    question: "What benefits AI provides business with?",
+    answer:
+      "higher revenues, reduced costs, business process automation, improved speed and accuracy, simplified data management, personalized customer experience, business risks mitigation are among the many benefits of AI.",
+  },
+];
 </script>
 
 <template>
@@ -239,10 +260,6 @@ const typewriterTexts = ["Hello", "world", "thocc", "panda"];
   </section>
 
   <section class="py-6">
-    <div class="container mx-auto flex max-w-6xl flex-col"></div>
-  </section>
-
-  <section class="py-6">
     <div class="container mx-auto flex max-w-6xl flex-col">
       <div class="grid grid-cols-9 items-center justify-between">
         <template
@@ -270,7 +287,7 @@ const typewriterTexts = ["Hello", "world", "thocc", "panda"];
           </div>
         </template>
       </div>
-      <ul class="flex h-48 flex-col justify-center bg-black px-6 gap-1">
+      <ul class="flex h-48 flex-col justify-center gap-1 bg-black px-6">
         <div
           v-for="task in developmentProcess[currentDevProcessIndex].tasks"
           :key="task"
@@ -278,9 +295,19 @@ const typewriterTexts = ["Hello", "world", "thocc", "panda"];
           <li class="text-lg font-medium text-white">
             {{ task }}
           </li>
-          <div class="w-48 h-0.5 bg-white"></div>
+          <div class="h-0.5 w-48 bg-white"></div>
         </div>
       </ul>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <faq-section :faqs="FAQs"></faq-section>
+  </section>
+  
+  <section class="py-6">
+    <div class="container mx-auto flex max-w-6xl flex-col">
+      
     </div>
   </section>
 </template>
