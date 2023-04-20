@@ -41,12 +41,12 @@ const eraseText = () => {
     if (displayTextArrayIndex.value >= props.displayTextArray.length) {
       displayTextArrayIndex.value = 0;
     }
-    setTimeout(typeText, props.typingSpeed + 1000);
+    setTimeout(typeText, props.typingSpeed);
   }
 };
 
 onMounted(() => {
-  setTimeout(typeText, props.newTextDelay + 200);
+  setTimeout(typeText, 0);
 });
 </script>
 
@@ -55,7 +55,7 @@ onMounted(() => {
     <span class="typing-effect">
       {{ typedValue }}
     </span>
-    <span class=" text-white">|</span>
+    <span :class="[typeStatus?'':'blinking-cursor']">|</span>
   </span>
 </template>
 

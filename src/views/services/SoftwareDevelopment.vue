@@ -178,7 +178,7 @@ let currentDevProcessIndex = ref<number>(0);
 const setCurrentIndex = (index: number) =>
   (currentDevProcessIndex.value = index);
 
-const FAQs: Array<{ question: string; answer: string }> = [
+const FAQs: Array<{ question: string; answer: string; }> = [
   {
     question: "What is AI in software development?",
     answer:
@@ -197,7 +197,7 @@ const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: "What benefits AI provides business with?",
     answer:
-      "higher revenues, reduced costs, business process automation, improved speed and accuracy, simplified data management, personalized customer experience, business risks mitigation are among the many benefits of AI.",
+      "Some of the benefits of AI are: <span><ul class='list-disc'><li>Higher revenues</li> <li>reduced costs</li> <li>business process automation</li> <li>improved speed and accuracy</li> <li>simplified data management</li> <li>personalized customer experience, and</li> <li>business risks mitigation</li></ul><span>",
   },
 ];
 </script>
@@ -312,7 +312,7 @@ const FAQs: Array<{ question: string; answer: string }> = [
   </section>
 </template>
 
-<style scoped>
+<style>
 .h-banner {
   min-height: 60vh;
   min-height: 60dvh;

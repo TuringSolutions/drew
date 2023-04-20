@@ -221,7 +221,13 @@ const AWSUseCases: Array<AWSUseCase> = [
   },
 ];
 
-const typewriterTextArray = ["Data Science and Technology", "Big Data Analytics", "Predictive Analysis", "Natural Language Processing", "Data Capture and OCR"]
+const typewriterTextArray = [
+  "Data Science and Technology",
+  "Big Data Analytics",
+  "Predictive Analysis",
+  "Natural Language Processing",
+  "Data Capture and OCR",
+];
 
 let currentAWSCase = ref<AWSUseCase | null>();
 
@@ -253,11 +259,14 @@ const turnTestimonialsRight = () => {
 </script>
 
 <template>
+ 
   <div
     id="VantaHero"
-    class="hero flex flex-col items-start justify-center bg-slate-900 px-16"
+    class="full-height flex flex-col items-start justify-center bg-slate-900 px-16"
   >
-    <div class="container mx-auto flex flex-col items-start justify-center gap-16 px-6 xl:px-8">
+    <div
+      class="container mx-auto flex max-w-screen-desktop flex-col items-start justify-center gap-16 px-6 xl:px-8"
+    >
       <div class="flex flex-col items-start justify-center gap-8">
         <div
           class="text-3xl font-medium uppercase text-white md:text-5xl xl:text-8xl"
@@ -265,7 +274,14 @@ const turnTestimonialsRight = () => {
           Big on Data Science & AI
         </div>
         <div class="text-xl text-gray-300 md:text-3xl xl:text-4xl">
-          Empowering your business needs with <typewriter-text class="bg-black px-3" :display-text-array="typewriterTextArray" :typing-speed="100" :erasing-speed="100" :new-text-delay="2000"></typewriter-text>
+          Empowering your business needs with
+          <typewriter-text
+            class="bg-black px-3"
+            :display-text-array="typewriterTextArray"
+            :typing-speed="100"
+            :erasing-speed="100"
+            :new-text-delay="2000"
+          ></typewriter-text>
         </div>
       </div>
       <button
@@ -278,7 +294,22 @@ const turnTestimonialsRight = () => {
     </div>
   </div>
 
-  <section class="bg-slate-700">
+  <section class="bg-slate-900">
+    <div class="container mx-auto max-w-screen-desktop xl:px-24 flex flex-col tablet:flex-row flex-wrap items-stretch justify-between">
+      <div v-for="useCase in useCases" :key="useCase.title" class="flex flex-col tablet:w-1/2 laptop:w-1/4 items-center justify-center py-6">
+        <div
+            class="text-center text-xl font-semibold uppercase text-white xl:text-3xl"
+          >
+            {{ useCase.title }}
+          </div>
+          <div class="text-md text-center font-medium text-gray-300">
+            {{ useCase.subtitle }}
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="bg-slate-700">
     <div
       class="grid grid-cols-1 divide-y px-4 md:grid-cols-2 md:divide-y-0 md:p-4 xl:grid-cols-4 xl:divide-x xl:px-0 xl:py-6"
     >
@@ -302,14 +333,14 @@ const turnTestimonialsRight = () => {
         </router-link>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section>
     <div
       class="grid grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
     >
       <div
-        class="flex flex-col items-center justify-center text-black xl:col-span-4 xl:col-start-2 xl:items-end"
+        class="flex flex-col items-center justify-center text-black xl:col-span-4 xl:col-start-2"
       >
         <div
           class="text-center text-2xl font-medium uppercase xl:text-right xl:text-4xl"
@@ -333,12 +364,12 @@ const turnTestimonialsRight = () => {
     </div>
   </section>
 
-  <section class="bg-black text-white">
+  <section class="bg-slate-900 text-white">
     <div
-      class="grid grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
+      class="container mx-auto max-w-screen-desktop grid grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
     >
       <div
-        class="flex flex-col items-center justify-center xl:col-span-4 xl:col-start-2 xl:items-end"
+        class="flex flex-col items-center justify-center xl:col-span-4 xl:col-start-2"
       >
         <div
           class="text-center text-2xl font-medium uppercase xl:text-right xl:text-4xl"
@@ -566,7 +597,7 @@ const turnTestimonialsRight = () => {
 </template>
 
 <style scoped>
-.hero {
+.full-height {
   height: 100vh;
   height: 100dvh;
 }

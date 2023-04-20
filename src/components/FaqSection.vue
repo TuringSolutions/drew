@@ -1,5 +1,10 @@
 <script setup lang="ts">
-defineProps<{faqs: Array<{question: string, answer: string}>}>();
+defineProps<{
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+}>();
 </script>
 
 <template>
@@ -23,9 +28,11 @@ defineProps<{faqs: Array<{question: string, answer: string}>}>();
         <div class="text-lg font-bold">
           {{ faq.question }}
         </div>
-        <div class="text-justify">
-          {{ faq.answer }}
-        </div>
+        <div
+          class="text-justify"
+          v-html="faq.answer"
+        ></div>
+        
       </div>
     </div>
   </div>

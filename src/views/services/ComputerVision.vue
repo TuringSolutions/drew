@@ -130,7 +130,7 @@ const useCases: Array<{ title: string; body: string; imgUrl: string }> = [
   },
 ];
 
-const FAQs: Array<{ question: string; answer: string }> = [
+const FAQs: Array<{ question: string; answer: string; }> = [
   {
     question: "How much does a typical computer vision project cost? ",
     answer:
@@ -139,7 +139,7 @@ const FAQs: Array<{ question: string; answer: string }> = [
   {
     question:
       "What technologies do you use to develop computer vision solutions?",
-    answer: "OpenCV, Open3D, OpenCL, scikit-image, PyTorch, Tensorflow, CoreML",
+    answer: "OpenCV, Open3D, OpenCL, scikit-image, PyTorch, Tensorflow, CoreML"
   },
   {
     question: "What computer vision apps can you develop?",
