@@ -11,7 +11,6 @@ import {
   CheckBadgeIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/vue/20/solid";
-import TypewriterText from "../../components/TypewriterText.vue";
 import FaqSection from "../../components/FaqSection.vue";
 onMounted(() => {
   const vantaEffect = NET({
@@ -178,7 +177,7 @@ let currentDevProcessIndex = ref<number>(0);
 const setCurrentIndex = (index: number) =>
   (currentDevProcessIndex.value = index);
 
-const FAQs: Array<{ question: string; answer: string; }> = [
+const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: "What is AI in software development?",
     answer:
@@ -242,17 +241,24 @@ const FAQs: Array<{ question: string; answer: string; }> = [
         technologies, and have developed our in-house proprietary models and
         tools to deliver benefits to our clients with ease.
       </div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+      <div>
         <div
-          v-for="tile in tiles"
-          :key="tile['title']"
-          class="flex flex-col items-center gap-2 border border-slate-400 p-4 shadow-xl transition-shadow hover:border-sky-500 hover:shadow-2xl"
+          class="divide-y overflow-hidden shadow shadow-gray-400 tablet:grid tablet:grid-cols-2 tablet:gap-px tablet:divide-y-0"
         >
-          <div class="text-xl font-semibold">
-            {{ tile.title }}
-          </div>
-          <div class="text-justify text-lg">
-            {{ tile.body }}
+          <div
+            v-for="tile in tiles"
+            :key="tile.title"
+            class="group p-6 outline outline-1 outline-gray-200"
+          >
+            <div class="flex flex-col items-start gap-4">
+              <h3 class="text-xl font-semibold leading-6">
+                {{ tile.title }}
+              </h3>
+              <p class="text-justify text-lg">
+                {{ tile.body }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -268,14 +274,14 @@ const FAQs: Array<{ question: string; answer: string; }> = [
         >
           <div
             class="group flex flex-col items-center transition-all hover:text-sky-500 hover:duration-200"
-            :class="[index == currentDevProcessIndex ? 'text-pink-700' : '']"
+            :class="[index == currentDevProcessIndex ? 'text-pink-500' : '']"
             @click="() => setCurrentIndex(index)"
           >
             <component :is="process.iconHtml" class="h-8 w-8" />
             <div>{{ process.title }}</div>
             <div
               class="h-1 w-1/2 transition-all duration-200 group-hover:scale-x-125 group-hover:bg-sky-500 group-hover:duration-300"
-              :class="[index == currentDevProcessIndex ? 'bg-pink-700' : '']"
+              :class="[index == currentDevProcessIndex ? 'bg-pink-500' : '']"
             ></div>
           </div>
           <div class="flex flex-row items-center justify-center">
@@ -287,12 +293,16 @@ const FAQs: Array<{ question: string; answer: string; }> = [
           </div>
         </template>
       </div>
-      <ul class="flex h-48 flex-col justify-center gap-1 bg-black px-6">
+      <div class="overflow-hidden rounded-full bg-gray-300 mt-2">
+        <div class="h-1 rounded-full bg-sky-500 transition-all duration-200" :style="'width: calc(100%/9*' + (currentDevProcessIndex * 2 + 1) +')'"></div>
+      </div>
+      <ul class="flex h-48 flex-col justify-center gap-1 px-6 outline outline-1 shadow outline-gray-200">
         <div
           v-for="task in developmentProcess[currentDevProcessIndex].tasks"
           :key="task"
+          class="mx-5"
         >
-          <li class="text-lg font-medium text-white">
+          <li class="text-lg font-medium list-disc ">
             {{ task }}
           </li>
           <div class="h-0.5 w-48 bg-white"></div>
@@ -304,11 +314,9 @@ const FAQs: Array<{ question: string; answer: string; }> = [
   <section class="py-24">
     <faq-section :faqs="FAQs"></faq-section>
   </section>
-  
+
   <section class="py-6">
-    <div class="container mx-auto flex max-w-6xl flex-col">
-      
-    </div>
+    <div class="container mx-auto flex max-w-6xl flex-col"></div>
   </section>
 </template>
 

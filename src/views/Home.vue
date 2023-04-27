@@ -241,6 +241,26 @@ const toggleAWSCase = (index: number) => {
 
 let centerTestimonialIndex = ref(0);
 
+let rightTestimonialIndex = computed<number>(() =>
+  centerTestimonialIndex.value + 1 == Testimonials.length
+    ? 0
+    : centerTestimonialIndex.value + 1
+);
+
+let leftTestimonialIndex = computed<number>(() =>
+  centerTestimonialIndex.value - 1 < 0
+    ? Testimonials.length - 1
+    : centerTestimonialIndex.value - 1
+);
+
+let rightTestimonial = computed<Testimonial>(() => 
+  Testimonials[rightTestimonialIndex.value]
+)
+
+let leftTestimonial = computed<Testimonial>(() => 
+  Testimonials[leftTestimonialIndex.value]
+)
+
 let centerTestimonial = computed<Testimonial>(() =>
   centerTestimonialIndex.value < Testimonials.length
     ? (Testimonials.at(
@@ -259,7 +279,6 @@ const turnTestimonialsRight = () => {
 </script>
 
 <template>
- 
   <div
     id="VantaHero"
     class="full-height flex flex-col items-start justify-center bg-slate-900 px-16"
@@ -295,16 +314,22 @@ const turnTestimonialsRight = () => {
   </div>
 
   <section class="bg-slate-900">
-    <div class="container mx-auto max-w-screen-desktop xl:px-24 flex flex-col tablet:flex-row flex-wrap items-stretch justify-between">
-      <div v-for="useCase in useCases" :key="useCase.title" class="flex flex-col tablet:w-1/2 laptop:w-1/4 items-center justify-center py-6">
+    <div
+      class="container mx-auto flex max-w-screen-desktop flex-col flex-wrap items-stretch justify-between tablet:flex-row xl:px-24"
+    >
+      <div
+        v-for="useCase in useCases"
+        :key="useCase.title"
+        class="flex flex-col items-center justify-center py-6 tablet:w-1/2 laptop:w-1/4"
+      >
         <div
-            class="text-center text-xl font-semibold uppercase text-white xl:text-3xl"
-          >
-            {{ useCase.title }}
-          </div>
-          <div class="text-md text-center font-medium text-gray-300">
-            {{ useCase.subtitle }}
-          </div>
+          class="text-center text-xl font-semibold uppercase text-white xl:text-3xl"
+        >
+          {{ useCase.title }}
+        </div>
+        <div class="text-md text-center font-medium text-gray-300">
+          {{ useCase.subtitle }}
+        </div>
       </div>
     </div>
   </section>
@@ -366,7 +391,7 @@ const turnTestimonialsRight = () => {
 
   <section class="bg-slate-900 text-white">
     <div
-      class="container mx-auto max-w-screen-desktop grid grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
+      class="container mx-auto grid max-w-screen-desktop grid-cols-1 justify-items-stretch gap-8 py-8 xl:grid-cols-11 xl:gap-0 xl:py-12"
     >
       <div
         class="flex flex-col items-center justify-center xl:col-span-4 xl:col-start-2"
@@ -385,8 +410,18 @@ const turnTestimonialsRight = () => {
           class="h-32 cursor-pointer"
           @click="turnTestimonialsLeft"
         ></chevron-left-icon>
+        <div class="relative">
+          <testimonial-card
+          class="testimonial-card bg-white text-black absolute -z-10 scale-75 "
+          :image-src="leftTestimonial.imageSrc"
+          :key="leftTestimonial.authorName"
+          :author-name="leftTestimonial.authorName"
+          :designation="leftTestimonial.designation"
+          :company="leftTestimonial.company"
+          :testimonial-body="leftTestimonial.testimonialBody"
+        />
 
-        <testimonial-card
+           <testimonial-card
           class="testimonial-card bg-white text-black"
           :image-src="centerTestimonial.imageSrc"
           :key="centerTestimonial.authorName"
@@ -395,6 +430,8 @@ const turnTestimonialsRight = () => {
           :company="centerTestimonial.company"
           :testimonial-body="centerTestimonial.testimonialBody"
         />
+        </div>
+       
 
         <chevron-right-icon
           class="h-32 cursor-pointer"
@@ -511,7 +548,8 @@ const turnTestimonialsRight = () => {
     </div>
   </section>
 
-  <section>
+  <section class="relative">
+    
     <div class="grid grid-cols-11 justify-items-stretch gap-4 py-8 xl:py-12">
       <div
         class="col-span-9 col-start-2 flex flex-col text-center text-2xl font-medium uppercase xl:text-4xl"
